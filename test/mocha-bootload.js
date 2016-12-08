@@ -26,6 +26,7 @@ global.TestUtils = require('react-addons-test-utils');
 /*eslint-disable */
 //let {shallowRenderer} = TestUtils;
 /*eslint-enable */
+global.__DEV__ = process.env.DEV ? JSON.parse(process.env.DEV) : true;
 
 process.on('unhandledRejection', (error)=>{
     console.error('Unhandled Promise Rejection:');

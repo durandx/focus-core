@@ -1,6 +1,7 @@
 import message from '../message';
 import {isObject, isArray, isString} from 'lodash/lang';
-import {translate} from '../translation';
+import translation.translate from '../translation';
+
 /**
 * Define all the error types of the exceptions which are defined.
 * @type {object}
@@ -87,7 +88,7 @@ function _treatGlobalMessagesPerType(messages, type) {
         }
         message.addMessage({
             type: type,
-            content: require('i18next-client').t(element, options),
+            content: translation.translate(element, options),
             creationDate: Date.now()
         });
     });
@@ -142,7 +143,7 @@ function _treatEntityExceptions(responseJSON = {}, options) {
     return Object.keys(fieldErrors)
         .reduce(
             (res, field) => {
-                res[field] = translate(fieldErrors[field]);
+                res[field] = translation.translate(fieldErrors[field]);
                 return res;
             }
             , {}

@@ -1,7 +1,8 @@
 /*global expect, it, describe*/
 // __tests__/container-test.js
+import actionBuilder from '../action-builder';
+import CoreStore from '../../store/CoreStore'
 
-const actionBuilder = require('../action-builder');
 describe('### action-builder', ()=>{
     it('Config must have a service', ()=>{
         expect(()=>actionBuilder({}))
@@ -22,7 +23,6 @@ describe('### action-builder', ()=>{
     });
 
     it('Builded action call should result to a store update', (done)=>{
-        const CoreStore = require('../../store/CoreStore');
         const store = new CoreStore({
             definition: {
             name: 'name'
@@ -34,6 +34,7 @@ describe('### action-builder', ()=>{
         };
         let nbCall = 0;
         store.addNameChangeListener((e)=>{
+            console.log('looool', nbCall, e);
             expect('lopeez' === e.callerId);
             nbCall++;
             if(2 === nbCall){
@@ -51,7 +52,6 @@ describe('### action-builder', ()=>{
         action(actionConf);
     });
     it('Error service shoud trigger a store error uodate', (done)=>{
-        const CoreStore = require('../../store/CoreStore');
         const store = new CoreStore({
             definition: {
             name: 'name'

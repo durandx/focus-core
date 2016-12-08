@@ -2,7 +2,7 @@
 // __tests__/container-test.js
 
 import CoreStore from '../CoreStore';
-import {handleViewAction as dispatch} from '../../dispatcher'
+import dispatcher from '../../dispatcher';
 describe('# The core store', ()=>{
     describe('listeners ', () => {
         const testStore = new CoreStore({definition: {person: 'person', address: 'address'}});
@@ -43,7 +43,7 @@ describe('# The core store', ()=>{
                    done();
                 }
                  testStore.addPersonChangeListener(onChange);
-                 dispatch({
+                 dispatcher.handleViewAction({
                      data: {person: PERSON},
                      type: 'update'
                  })
@@ -56,7 +56,7 @@ describe('# The core store', ()=>{
                    done();
                 }
                  testStore.addPersonErrorListener(onChange);
-                 dispatch({
+                 dispatcher.handleViewAction({
                      data: {person: PERSON_ERROR},
                      type: 'updateError'
                  })
@@ -69,7 +69,7 @@ describe('# The core store', ()=>{
                    done();
                 }
                  testStore.addPersonStatusListener(onChange);
-                 dispatch({
+                 dispatcher.handleViewAction({
                      data: {person: PERSON_STATUS},
                      type: 'updateStatus',
                      status: {person: PERSON_STATUS}
